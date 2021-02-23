@@ -31,17 +31,6 @@ mongoose.connect(
     }
   );
   
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { useNewUrlParser: true });
-
-
-//create a Workout Plan Database when the application starts
-// db.Workout.create({ name: "My Workout Plan" })
-//   .then(dbWorkout => {
-//     console.log(dbWorkout);
-//   })
-//   .catch(({ message }) => {
-//     console.log(message);
-//   });
 
 
 //listening on PORT

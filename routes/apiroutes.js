@@ -45,13 +45,14 @@ app.post("/api/workouts", (req, res) => {
 app.put("/api/workouts/:id", (req, res) => {
     db.Exercise.create(req.body)
       .then(({_id}) => db.Workout.findOneAndUpdate({ _id: req.params.id }, {$push: {exercises: _id}}, { new: true }))
-                    // $inc: {totalDuration: _id.duration}
+      .aggregate({$addFields:{totalDuration:{$sum: "$duration"}}})
       .then(dbWorkout => {
             res.json(dbWorkout);
         }).catch(err => {
             res.json(err);
         });
 });
+
 
 
 }; //end module.export
