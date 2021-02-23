@@ -24,13 +24,13 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { 
 
 
 //create a Workout Plan Database when the application starts
-db.Workout.create({ name: "My Workout Plan" })
-  .then(dbWorkout => {
-    console.log(dbWorkout);
-  })
-  .catch(({ message }) => {
-    console.log(message);
-  });
+// db.Workout.create({ name: "My Workout Plan" })
+//   .then(dbWorkout => {
+//     console.log(dbWorkout);
+//   })
+//   .catch(({ message }) => {
+//     console.log(message);
+//   });
 
 
 //listening on PORT
