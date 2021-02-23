@@ -19,14 +19,13 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { 
 
 
 //create a Workout Plan Database when the application starts
-db.WorkoutPlan.create({ name: "My Workout Plan" })
-  .then(dbWorkoutPlan => {
-    console.log(dbWorkoutPlan);
+db.Workout.create({ name: "My Workout Plan" })
+  .then(dbWorkout => {
+    console.log(dbWorkout);
   })
   .catch(({ message }) => {
     console.log(message);
   });
-
 
 
 
@@ -55,7 +54,7 @@ app.get("/api/workouts/range", (req, res) => {
 });
 
 //CREATE a NEW workout (date specific)
-app.post('/api/workouts', (req, res) => {
+app.post("/api/workouts", (req, res) => {
     db.Workout.create(req.body).then((dbWorkout) => {
         res.json(dbWorkout);
       }).catch(err => {
@@ -64,34 +63,45 @@ app.post('/api/workouts', (req, res) => {
     });
 
 
-    
+
     
 //ROUTES for updating SPECIFIC Workouts
 
-//fill in the exercises into the workout (replacing the id only records)
-app.get("/populated", (req, res) => {
-    db.Workout.find({})
-      .populate("exercises")
-      .then(dbWorkout => {   //dbWorkout.exercises  to get array of exercises
-        res.json(dbWorkout);
-      })
-      .catch(err => {
-        res.json(err);
-      });
-});
+// // App.put to update workouts by MongoDB _id value and update the exercise body
+// app.put("/api/workouts/:id", (req, res) => {
+//         db.Workout.findByIdAndUpdate(
+//           { _id: req.params.id }, { exercises: req.body }
+//         ).then((dbWorkout) => {
+//           res.json(dbWorkout);
+//         }).catch(err => {
+//           res.status(400).json(err);
+//         });
 
 
-//Submit an Exercise to the workout... this is not right... /api/workouts/:workout or /api/workouts/:exercise?
-app.post("/api/workouts/submit", ({body}, res) => {
-    db.Exercise.create(body)
-      .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { exercise: _id } }, { new: true }))
-      .then(dbWorkout => {
-        res.json(dbWorkout);
-      })
-      .catch(err => {
-        res.json(err);
-      });
-  });
+// //fill in the exercises into the workout (replacing the id only records)
+// app.get("/populated", (req, res) => {
+//     db.Workout.find({})
+//       .populate("exercises")
+//       .then(dbWorkout => {   //dbWorkout.exercises  to get array of exercises
+//         res.json(dbWorkout);
+//       })
+//       .catch(err => {
+//         res.json(err);
+//       });
+// });
+
+
+// //Submit an Exercise to the workout... this is not right... /api/workouts/:workout or /api/workouts/:exercise?
+// app.post("/api/workouts/submit", ({body}, res) => {
+//     db.Exercise.create(body)
+//       .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { exercise: _id } }, { new: true }))
+//       .then(dbWorkout => {
+//         res.json(dbWorkout);
+//       })
+//       .catch(err => {
+//         res.json(err);
+//       });
+//   });
 
 
 
@@ -100,4 +110,3 @@ app.post("/api/workouts/submit", ({body}, res) => {
   app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
   });
-  
