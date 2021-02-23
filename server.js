@@ -20,7 +20,18 @@ app.use(express.static("public"));
 require("./routes/HTMLroutes.js")(app, path)
 require("./routes/APIroutes.js")(app)
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { useNewUrlParser: true });
+
+mongoose.connect(
+    process.env.MONGODB_URI || 'mongodb://localhost/Fitness_Tracker_App',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false
+    }
+  );
+  
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { useNewUrlParser: true });
 
 
 //create a Workout Plan Database when the application starts
