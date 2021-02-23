@@ -45,7 +45,7 @@ app.post("/api/workouts", (req, res) => {
 app.put("/api/workouts/:id", (req, res) => {
     db.Exercise.create(req.body)
       .then(({_id}) => db.Workout.findOneAndUpdate({ _id: req.params.id }, {$push: {exercises: _id}}, { new: true }))
-      .aggregate({$addFields:{totalDuration:{$sum: "$duration"}}})
+      .aggregate({$addFields:{totalDuration:{$sum: totalDuration}}})
       .then(dbWorkout => {
             res.json(dbWorkout);
         }).catch(err => {
