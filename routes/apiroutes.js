@@ -1,3 +1,4 @@
+const db = require("../models")
 const path = require("path");
 
 
@@ -6,6 +7,7 @@ module.exports = function(app, path) {
 //GET ALL workouts
 app.get("/api/workouts", (req, res) => {
     db.Workout.find({})
+      .populate("exercises") //populate method for populating all workouts with exercises
       .then(dbWorkout => {
         res.json(dbWorkout);
       })
@@ -17,6 +19,7 @@ app.get("/api/workouts", (req, res) => {
 //GET ALL workouts in RANGE
 app.get("/api/workouts/range", (req, res) => {
     db.Workout.find({})
+      .populate("exercises") //populate method for populating workouts in range with exercises
       .then(dbWorkout => {
         res.json(dbWorkout);
       })
@@ -95,17 +98,17 @@ app.put("/api/workouts/:id", (req, res) => {
         });
 });
 
-//fill in the exercises into the workout (replacing the id only records)
-app.get("/api/workouts/populated", (req, res) => {
-    db.Workout.find({})
-      .populate("exercises")
-      .then(dbWorkout => {   //dbWorkout.exercises  to get array of exercises
-        res.json(dbWorkout);
-      })
-      .catch(err => {
-        res.json(err);
-    });
-});
+// //fill in the exercises into the workout (replacing the id only records)
+// app.get("/api/workouts/populated", (req, res) => {
+//     db.Workout.find({})
+//       .populate("exercises")
+//       .then(dbWorkout => {   //dbWorkout.exercises  to get array of exercises
+//         res.json(dbWorkout);
+//       })
+//       .catch(err => {
+//         res.json(err);
+//     });
+// });
 
 });
 // //Submit an Exercise to the workout... this is not right... /api/workouts/:workout or /api/workouts/:exercise?
