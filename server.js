@@ -17,8 +17,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //require routes
-require("./routes/HTMLroutes.js")(app, path)
-require("./routes/APIroutes.js")(app)
+require("./routes/HTMLroutes.js")(app, path);
+require("./routes/APIroutes.js")(app, path);
 
 
 mongoose.connect(
