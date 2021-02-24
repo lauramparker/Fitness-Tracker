@@ -3,16 +3,16 @@
 <h3><u>Fitness Tracker<u></h3>
 
 <h3>Description:</h3>
-    "Fitness Tracker" is a Node.js application, deployed through Heroku, that allows the user to 1) log daily workouts with cardio and resistance exercises; 2) view a dashboard of overall stats (excercise duration and overall weight).  When the application opens, the user has two options from the homepage: "Create New Workout" or "Continue Current Workout"
+    "Fitness Tracker" is a Node.js application, deployed through Heroku, that allows the user to 1) log daily workouts with cardio and resistance exercises; 2) view a dashboard of overall stats (excercise duration and overall weight).  When the application opens, the user has two options from the homepage: "Create New Workout" or "Continue Current Workout".
 
 
 <h3>Overview Snapshots of User Interface:</h3> 
 <p>
-    <img src="/imageREADME (1).png" width="350" height="350" />
+    <img src="/imageREADME (3).png" width="350" height="350" />
 </p>
 
 <p>
-    <img src="/imageREADME (2).png" width="350" height="350" />
+    <img src="/imageREADME (4).png" width="350" height="350" />
 </p>
 
 
