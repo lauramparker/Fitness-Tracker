@@ -17,6 +17,7 @@ app.get("/api/workouts", (req, res) => {
     });
 });
 
+
 //GET ALL workouts in RANGE
 app.get("/api/workouts/range", (req, res) => {
     db.Workout.find({})
@@ -30,6 +31,19 @@ app.get("/api/workouts/range", (req, res) => {
     });
 });
 
+//GET ALL workouts and aggregate the duration
+app.get("/api/workouts/range", (req, res) => {
+    db.Workout.aggregate([{$addFields: {totalDuration: {$sum: "exercises.duration"}}}])
+    .then(dbWorkout => {
+        res.json(dbWorkout);
+      })
+      .catch(err => {
+        res.json(err);
+    });
+});
+
+
+
 //CREATE a NEW workout (date specific)
 app.post("/api/workouts", (req, res) => {
     db.Workout.create({ day: Date.now() }) //adds current date
@@ -41,11 +55,10 @@ app.post("/api/workouts", (req, res) => {
       });
 });
 
-//UPDATE a workout with adding exercises
-app.put("/api/workouts/:id", (req, res) => {
-    db.Exercise.create(req.body)
-      .then(({_id}) => db.Workout.findOneAndUpdate({ _id: req.params.id }, {$push: {exercises: _id}}, { new: true }))
-    //   .aggregate({$addFields:{totalDuration:{$sum: totalDuration}}})
+//UPDATE a workout with added exercises
+app.put("/api/workouts/:id", ({params, body}, res) => {
+    db.Exercise.create(body)
+      .then(({}) => db.Workout.findByIdAndUpdate({ _id: params.id }, {$push: {exercises: body}}, { new: true }))
       .then(dbWorkout => {
             res.json(dbWorkout);
         }).catch(err => {
