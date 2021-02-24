@@ -8,11 +8,11 @@
 
 <h3>Overview Snapshots of User Interface:</h3> 
 <p>
-    <img src="/imageREADME (3).png" width="350" height="350" />
+    <img src="./imageREADME (3).png" width="350" height="350" />
 </p>
 
 <p>
-    <img src="/imageREADME (4).png" width="350" height="350" />
+    <img src="./imageREADME (4).png" width="350" height="350" />
 </p>
 
 
