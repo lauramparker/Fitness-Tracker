@@ -56,15 +56,16 @@ app.post("/api/workouts", (req, res) => {
 });
 
 //UPDATE a workout with added exercises
-app.put("/api/workouts/:id", ({params, body}, res) => {
+app.put("/api/workouts/:id", ({body}, res) => {
     db.Exercise.create(body)
-      .then(({}) => db.Workout.findByIdAndUpdate({ _id: params.id }, {$push: {exercises: body}}, { new: true }))
+      .then(({_id}) => db.Workout.findOneAndUpdate({}, { $push: { exercise: _id } }, { new: true }))
       .then(dbWorkout => {
-            res.json(dbWorkout);
-        }).catch(err => {
-            res.json(err);
-        });
-});
+        res.json(dbWorkout);
+      })
+      .catch(err => {
+        res.json(err);
+      });
+  });
 
 
 
